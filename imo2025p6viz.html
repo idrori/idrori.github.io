@@ -1,50 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>IMO 2025 Problem 6 Visualization</title>
-  <!-- Responsive viewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>IMO&nbsp;2025 Problem&nbsp;6 Visualization (Extended)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    The uncovered cells are placed in a shifting pattern (one
+    per row and column, arranged off the diagonal), the large k×k blocks are
+    positioned between these holes, and the remaining squares are partitioned
+    into long horizontal and vertical stripes.  This yields exactly k² + 2k − 3
+    tiles, in accordance with the formula below.
+
+    The minimum number of rectangular tiles needed to cover an n×n grid so that
+    each row and column contains exactly one uncovered unit square is given by
+    T(n) = n + 2⌊√n⌋ − 3.  When n is a perfect square, n = k², this simplifies to
+    T(n) = k² + 2k − 3.  For k = 5, n = 25 and T(n) = 32.
+  -->
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    h1 {
-      margin-bottom: 0.2em;
-    }
-    .controls {
-      margin-top: 1em;
-      margin-bottom: 1em;
-    }
-    #grid {
-      display: inline-block;
-      border: 1px solid #333;
-      margin-top: 1em;
-    }
-    .cell {
-      width: 20px;
-      height: 20px;
-      box-sizing: border-box;
-      border: 1px solid #eee;
-      display: inline-block;
-    }
-    .legend {
-      margin-top: 1em;
-    }
-    .legend div {
-      margin-bottom: 0.3em;
-    }
-    .info {
-      margin-top: 2em;
-      max-width: 800px;
-    }
-    /* New modern styling overrides */
-    /* Base styling */
+    /* Basic reset and typography */
     body {
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
       background: #f5f7fa;
       color: #333;
       line-height: 1.5;
@@ -131,7 +108,7 @@
       margin-right: auto;
       overflow-x: auto;
       max-width: 100%;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
     .cell {
       width: 20px;
@@ -187,37 +164,34 @@
 </head>
 <body>
   <div class="container">
-    <img src="imo_header.png" alt="" class="header-image">
-    <h1>IMO 2025 Problem 6 Visualization</h1>
-    <p>Consider a 2025 x 2025 grid of unit squares. Matlida wishes to place on the grid some rectangular tiles, possibly of different sizes, such that each side of every tile lies on a grid line and every unit square is covered by at most one tile. Determine the minimum number of tiles Matlida needs to place so that each row and each column of the grid has exactly one unit square that is not covered by any tile.</p>
-    <p>This visualization helps you explore the solution. The problem asks for the minimum number of rectangular tiles needed to cover an n×n grid so that every row and column has exactly one uncovered unit square. n = 2025 = k^2, where k=45.</p>
-
+    <!-- Decorative header image.  See imo_header.png in the same directory. -->
+    <img src="imo_header.png" alt="" class="header-image" />
+    <h1>IMO 2025 Problem 6 Visualization</h1>
+    <p>Consider a 2025 × 2025 grid of unit squares. Matlida wishes to place on the grid some rectangular tiles, possibly of different sizes, such that each side of every tile lies on a grid line and every unit square is covered by at most one tile. Determine the minimum number of tiles Matlida needs to place so that each row and each column of the grid has exactly one unit square that is not covered by any tile.</p>
+    <p>This visualization helps you explore the solution. The problem asks for the minimum number of rectangular tiles needed to cover an n×n grid so that every row and column has exactly one uncovered unit square. In this extended version you can explore values of k up to 5 (recall n = k², so n = 25 corresponds to k = 5).</p>
     <div class="controls">
-    <label for="kInput">Choose the block size k (where n = k<sup>2</sup>):</label>
-    <!-- Restrict k to small values (1–4) to visualise correct patterns for k=2,3,4 -->
-    <input id="kInput" type="range" min="1" max="4" value="2" step="1" oninput="updateGrid()">
-    <span id="kValue">2</span>
+      <label for="kInput">Choose the block size k (where n = k<sup>2</sup>):</label>
+      <!-- Allow k up to 5.  Minimum 1 to see the trivial cases.  Default 2 shows the smallest nontrivial tiling. -->
+      <input id="kInput" type="range" min="2" max="5" value="2" step="1" oninput="updateGrid()" />
+      <span id="kValue">2</span>
     </div>
-
     <div id="grid"></div>
-
     <div class="legend">
       <div><span style="display:inline-block;width:18px;height:18px;background:#ffffff;border:1px solid #333;margin-right:0.5em;"></span> Uncovered cell (one per row and column)</div>
     </div>
-
     <div class="info">
-     <p>The minimum number of tiles needed for an n×n grid is given by<br>
-      T(n) = n + 2&nbsp;floor(√n)&nbsp;−&nbsp;3.<br>
-      When n is a perfect square, n = k<sup>2</sup>, this simplifies to T(n) = k<sup>2</sup> + 2k − 3.  The formula is displayed below for the chosen k.</p>
-    <p id="tileCount"></p>
-   <p>This visualizer focuses on the case where n is a perfect square (choose k using the slider). The structures you see here generalize to larger grids.</p>
+      <p>The minimum number of tiles needed for an n×n grid is given by<br />
+        T(n) = n + 2 floor(√n) − 3.<br />
+        When n is a perfect square, n = k², this simplifies to T(n) = k² + 2k − 3. The formula is displayed below for the chosen k.</p>
+      <p id="tileCount"></p>
+      <p>This visualiser focuses on the case where n is a perfect square (choose k using the slider). The structures you see here generalise to larger grids.</p>
     </div>
-  </div> <!-- end container -->
-
+  </div>
   <script>
-    // Predefined colour palette for off-diagonal blocks
+    // Predefined colour palette for off‑diagonal blocks and stripes.
     const palette = [
-      '#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', '#ffff99', '#1f78b4', '#33a02c', '#e31a1c', '#ff7f00', '#6a3d9a'
+      '#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', '#ffff99',
+      '#1f78b4', '#33a02c', '#e31a1c', '#ff7f00', '#6a3d9a'
     ];
 
     function updateGrid() {
@@ -227,41 +201,21 @@
       const n = k * k;
       const gridDiv = document.getElementById('grid');
       gridDiv.innerHTML = '';
-      // Set grid width dynamically
-      // Determine drawing mode. For small k (<= blockThreshold) we display every unit cell;
-      // for larger k we compress each k×k block into one cell to keep the visual manageable.
+      // For small k (≤10) draw each unit cell at 20 px.  For large k scale down.
       const blockThreshold = 10;
-      // Compute cell size: for small grids, use 20px; for large, scale to fit within 800px width.
       let cellSize;
       if (k > blockThreshold) {
         cellSize = Math.max(4, Math.floor(800 / k));
       } else {
         cellSize = 20;
       }
+      // Set grid width: for small k use n cells per row; for large k compress each block.
       gridDiv.style.width = (cellSize * (k > blockThreshold ? k : n)) + 'px';
 
-      // Prepare tile count and cell colouring logic
       let tileCount;
-      // Predefine colours for special cases (k == 2) to illustrate windmill tiling
-      const windmillColours = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6'];
-
-      // Handle special small case k = 1
-      if (k === 1) {
-        tileCount = 0;
-        document.getElementById('tileCount').innerHTML = `For k = ${k} (n = ${n}), the minimum number of tiles is <strong>${tileCount}</strong>.`;
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.style.width = cellSize + 'px';
-        cell.style.height = cellSize + 'px';
-        cell.style.background = '#ffffff';
-        cell.style.border = '1px solid #333';
-        gridDiv.appendChild(cell);
-        return;
-      }
-
-      // Predefined tilings for k = 2, 3, 4.  Each entry specifies the grid size n, a list of hole positions (uncovered cells),
-      // a mapping from "r,c" strings to tile indices, and the total tile count.  These patterns are precomputed to illustrate
-      // the optimal tilings for small k.  When a custom tiling is available for the selected k, the visualiser will use it.
+      // Predefined tilings for k = 2, 3 and 4 (from the original visualiser).  These illustrate
+      // the “windmill” patterns and block tilings for small values of k.  For k = 5 and above
+      // we fall back to the general pattern below.
       const customTilings = {
         2: {
           n: 4,
@@ -298,8 +252,6 @@
           n: 16,
           holes: ['0,3','1,7','2,11','3,15','4,2','5,6','6,10','7,14','8,1','9,5','10,9','11,13','12,0','13,4','14,8','15,12'],
           mapping: {
-            // 9 block tiles of size 4×4.  Each block covers rows r..r+3 and cols c..c+3.  In the previous
-            // version some rows were omitted; here we include the full 4×4 area for each block tile.
             '1,3':0,'1,4':0,'1,5':0,'1,6':0,'2,3':0,'2,4':0,'2,5':0,'2,6':0,'3,3':0,'3,4':0,'3,5':0,'3,6':0,'4,3':0,'4,4':0,'4,5':0,'4,6':0,
             '2,7':1,'2,8':1,'2,9':1,'2,10':1,'3,7':1,'3,8':1,'3,9':1,'3,10':1,'4,7':1,'4,8':1,'4,9':1,'4,10':1,'5,7':1,'5,8':1,'5,9':1,'5,10':1,
             '3,11':2,'3,12':2,'3,13':2,'3,14':2,'4,11':2,'4,12':2,'4,13':2,'4,14':2,'5,11':2,'5,12':2,'5,13':2,'5,14':2,'6,11':2,'6,12':2,'6,13':2,'6,14':2,
@@ -316,10 +268,7 @@
             '1,8':13,'1,9':13,'1,10':13,'1,11':13,'1,12':13,'1,13':13,'1,14':13,'1,15':13,
             '2,12':14,'2,13':14,'2,14':14,'2,15':14,
             '4,15':15,'5,15':15,'6,15':15,'7,15':15,'8,15':15,'9,15':15,'10,15':15,'11,15':15,'12,15':15,'13,15':15,'14,15':15,'15,15':15,
-            // Red vertical stripe of length 7 in column 14 (rows 8–14).  Do not include row 15 here; the cell (15,14)
-            // is part of the purple “cross” tile below.
             '8,14':16,'9,14':16,'10,14':16,'11,14':16,'12,14':16,'13,14':16,'14,14':16,
-            // Purple “cross” tile: vertical stripe in column 13 (rows 12–15) plus a single cell at (15,14)
             '12,13':17,'13,13':17,'14,13':17,'15,13':17,'15,14':20,
             '13,0':18,'13,1':18,'13,2':18,'13,3':18,
             '14,0':19,'14,1':19,'14,2':19,'14,3':19,'14,4':19,'14,5':19,'14,6':19,'14,7':19,
@@ -329,30 +278,22 @@
         }
       };
 
-      // If a custom tiling is defined for this k, draw that tiling and return.
+      // If a custom tiling is defined for this k, use it and return.
       if (customTilings[k]) {
         const tiling = customTilings[k];
         tileCount = tiling.tileCount;
-        document.getElementById('tileCount').innerHTML = `For k = ${k} (n = ${n}), the minimum number of tiles is <strong>${tileCount}</strong> (= k^2 + 2k − 3).`;
+        document.getElementById('tileCount').innerHTML = `For k = ${k} (n = ${n}), the minimum number of tiles is <strong>${tileCount}</strong> (= k² + 2k − 3).`;
         const holes = new Set(tiling.holes);
-        // Assign colours to tiles.  We want the k×k block tiles to have distinct colours
-        // separate from the long stripe tiles.  For k=2,3,4 the number of k×k blocks is
-        // given by (k-1)^2 (1 for k=2, 4 for k=3, and 9 for k=4).  Use the first
-        // blockTileCount colours from the palette for these blocks, and assign the
-        // remaining tiles colours from the tail of the palette (cycling if necessary).
+        // Determine how many of the first colours should be reserved for block tiles.  (k−1)² blocks for k ≥ 2.)
         const blockTileCountLookup = {2: 1, 3: 4, 4: 9};
         const blockTileCount = blockTileCountLookup[k] || 0;
         const tileColours = [];
-        // Create a palette for stripe tiles by taking colours after the block palette.
-        // If the palette is shorter than the number of block tiles, use modulo indexing.
+        // Colours for stripe tiles start after the block colours in the palette.
         const stripePalette = palette.slice(blockTileCount % palette.length);
-        for (let i = 0; i < tileCount; i++) {
+        for (let i = 0; i < tiling.tileCount; i++) {
           if (i < blockTileCount) {
             tileColours[i] = palette[i % palette.length];
           } else {
-            // Assign stripe colours from the stripePalette, cycling as needed.  If the
-            // stripePalette is empty (this can happen if blockTileCount >= palette.length),
-            // fall back to cycling through the full palette starting after blockTileCount.
             if (stripePalette.length > 0) {
               tileColours[i] = stripePalette[(i - blockTileCount) % stripePalette.length];
             } else {
@@ -379,18 +320,33 @@
         }
         return;
       }
-
-      // Fallback: use block-level representation for very large k (beyond our custom range)
+      // General pattern for other k (k not in customTilings).  For moderate k we
+      // compute an explicit tiling based on the shifting hole pattern and a
+      // family of (k − 1)×(k − 1) big k×k blocks together with 4(k − 1) long
+      // stripes.  The uncovered cells are placed one per row and
+      // column in a shifted (non‑diagonal) pattern, the k×k squares are placed
+      // between the holes, and the remaining cells are partitioned into
+      // horizontal and vertical stripes.  The total number of tiles is
+      // (k − 1)² + 4(k − 1) = k² + 2k − 3.
+      tileCount = n + 2 * k - 3;
+      document.getElementById('tileCount').innerHTML = `For k = ${k} (n = ${n}), the minimum number of tiles is <strong>${tileCount}</strong> (= k² + 2k − 3).`;
+      // If k is very large, compress each k×k block into a single cell to
+      // maintain performance and provide a miniature view.
       if (k > blockThreshold) {
-        tileCount = n + 2 * k - 3;
-        document.getElementById('tileCount').innerHTML = `For k = ${k} (n = ${n}), the minimum number of tiles is <strong>${tileCount}</strong> (= n + 2k − 3).`;
+        // Compute the column of the uncovered cell for each row for the miniature.
+        const holeColMini = new Array(n);
+        for (let r = 0; r < n; r++) {
+          const j = Math.floor(r / k);
+          const g = r % k;
+          holeColMini[r] = k * g + (k - 1 - j);
+        }
         for (let br = 0; br < k; br++) {
           for (let bc = 0; bc < k; bc++) {
             const cell = document.createElement('div');
             cell.className = 'cell';
             cell.style.width = cellSize + 'px';
             cell.style.height = cellSize + 'px';
-            cell.style.position = 'relative';
+            // Use grey for the diagonal blocks and palette colours for off‑diagonal blocks.
             if (br === bc) {
               cell.style.background = '#dddddd';
               const mini = document.createElement('div');
@@ -411,34 +367,119 @@
         }
         return;
       }
-
-      // Default general pattern for other small k values (should not execute for k ≤ 4)
-      tileCount = n + 2 * k - 3;
-      document.getElementById('tileCount').innerHTML = `For k = ${k} (n = ${n}), the minimum number of tiles is <strong>${tileCount}</strong> (= n + 2k − 3).`;
+      // For moderate k (including k = 5) draw every unit cell and compute the
+      // tiling explicitly.
+      // Precompute the column of the uncovered cell for each row.
+      const holeCol = new Array(n);
+      for (let r = 0; r < n; r++) {
+        const j = Math.floor(r / k);
+        const g = r % k;
+        holeCol[r] = k * g + (k - 1 - j);
+      }
+      // Build a mapping from cell coordinates to tile indices.  First allocate
+      // indices for the big k×k blocks: there are (k − 1)² such blocks.
+      const mapping = {};
+      let tileIndexCounter = 0;
+      // Place the big squares (between the holes) indexed 0 to (k−1)^2−1.
+      for (let j = 0; j < k - 1; j++) {
+        for (let g = 1; g < k; g++) {
+          const rStart = j * k + g;
+          const cStart = k * (g - 1) + (k - 1 - j);
+          for (let r = rStart; r < rStart + k; r++) {
+            for (let c = cStart; c < cStart + k; c++) {
+              mapping[`${r},${c}`] = tileIndexCounter;
+            }
+          }
+          tileIndexCounter++;
+        }
+      }
+      // Place the long stripes: for each j from 0 to k−2 we create four stripes.
+      const blockCount = (k - 1) * (k - 1);
+      for (let j = 0; j < k - 1; j++) {
+        const length = k * (k - 1 - j);
+        // Left vertical stripe at column j, rows 0..length-1.
+        let tIndex = blockCount + j * 4;
+        for (let r = 0; r < length; r++) {
+          // Skip holes and big squares (mapping[r,c] already defined).
+          const key = `${r},${j}`;
+          if (mapping[key] === undefined && holeCol[r] !== j) {
+            mapping[key] = tIndex;
+          }
+        }
+        // Top horizontal stripe at row j, columns (j+1)*k .. (j+1)*k + length - 1.
+        tIndex = blockCount + j * 4 + 1;
+        for (let c = (j + 1) * k; c < (j + 1) * k + length; c++) {
+          const key = `${j},${c}`;
+          // Skip if hole or already in a block.
+          if (mapping[key] === undefined && holeCol[j] !== c) {
+            mapping[key] = tIndex;
+          }
+        }
+        // Right vertical stripe at column n - 1 - j, rows (j+1)*k .. (j+1)*k + length - 1.
+        tIndex = blockCount + j * 4 + 2;
+        for (let r = (j + 1) * k; r < (j + 1) * k + length; r++) {
+          const key = `${r},${n - 1 - j}`;
+          if (mapping[key] === undefined && holeCol[r] !== (n - 1 - j)) {
+            mapping[key] = tIndex;
+          }
+        }
+        // Bottom horizontal stripe at row n - 1 - j, columns 0 .. length - 1.
+        tIndex = blockCount + j * 4 + 3;
+        for (let c = 0; c < length; c++) {
+          const key = `${n - 1 - j},${c}`;
+          if (mapping[key] === undefined && holeCol[n - 1 - j] !== c) {
+            mapping[key] = tIndex;
+          }
+        }
+      }
+      // Determine how many of the first colours should be reserved for block tiles.
+      // We extend the lookup with k = 5 entry to ensure that block tiles use
+      // distinct colours.
+      const blockTileCountLookup = {2: 1, 3: 4, 4: 9, 5: 16};
+      const blockTileCount = blockTileCountLookup[k] || 0;
+      const totalTiles = (k - 1) * (k - 1) + 4 * (k - 1);
+      // Construct the tile colour array: assign the first blockTileCount colours
+      // from the palette to the square tiles and then cycle through the palette
+      // for the remaining stripe tiles.
+      const tileColours = [];
+      // Create a stripe palette starting after the block colours in the palette.
+      const stripePalette = palette.slice(blockTileCount % palette.length);
+      for (let i = 0; i < totalTiles; i++) {
+        if (i < blockTileCount) {
+          tileColours[i] = palette[i % palette.length];
+        } else {
+          if (stripePalette.length > 0) {
+            tileColours[i] = stripePalette[(i - blockTileCount) % stripePalette.length];
+          } else {
+            tileColours[i] = palette[(i - blockTileCount) % palette.length];
+          }
+        }
+      }
+      // Now draw every unit cell according to the mapping.  Uncovered cells are
+      // white with a border.  Cells in big blocks and stripes use the
+      // appropriate colour from tileColours.
       for (let r = 0; r < n; r++) {
         for (let c = 0; c < n; c++) {
           const cell = document.createElement('div');
           cell.className = 'cell';
           cell.style.width = cellSize + 'px';
           cell.style.height = cellSize + 'px';
-          const blockRow = Math.floor(r / k);
-          const blockCol = Math.floor(c / k);
-          if (blockRow === blockCol) {
-            if ((r % k) === (c % k)) {
-              cell.style.background = '#ffffff';
-              cell.style.border = '1px solid #333';
-            } else {
-              cell.style.background = '#dddddd';
-            }
+          if (c === holeCol[r]) {
+            // Uncovered cell.
+            cell.style.background = '#ffffff';
+            cell.style.border = '1px solid #333';
           } else {
-            const colorIndex = (blockRow * k + blockCol) % palette.length;
-            cell.style.background = palette[colorIndex];
+            const idx = mapping[`${r},${c}`];
+            // If for some reason mapping is undefined (should not happen), fallback colour.
+            const colour = tileColours[idx % tileColours.length] || palette[(r + c) % palette.length];
+            cell.style.background = colour;
           }
           gridDiv.appendChild(cell);
         }
       }
+      return;
     }
-    // Initialize on load
+    // Initialise the grid on page load.
     window.onload = updateGrid;
   </script>
 </body>
