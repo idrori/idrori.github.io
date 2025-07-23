@@ -5,8 +5,7 @@
   <title>IMO&nbsp;2025 Problem&nbsp;6 Visualization (Extended)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--
-    The uncovered cells are placed in a shifting pattern (one
-    per row and column, arranged off the diagonal), the large k×k blocks are
+    The uncovered cells are placed in a shifting pattern, the large k×k blocks are
     positioned between these holes, and the remaining squares are partitioned
     into long horizontal and vertical stripes.  This yields exactly k² + 2k − 3
     tiles, in accordance with the formula below.
@@ -213,9 +212,6 @@
       gridDiv.style.width = (cellSize * (k > blockThreshold ? k : n)) + 'px';
 
       let tileCount;
-      // Predefined tilings for k = 2, 3 and 4 (from the original visualiser).  These illustrate
-      // the “windmill” patterns and block tilings for small values of k.  For k = 5 and above
-      // we fall back to the general pattern below.
       const customTilings = {
         2: {
           n: 4,
@@ -278,7 +274,6 @@
         }
       };
 
-      // If a custom tiling is defined for this k, use it and return.
       if (customTilings[k]) {
         const tiling = customTilings[k];
         tileCount = tiling.tileCount;
@@ -320,7 +315,7 @@
         }
         return;
       }
-      // General pattern for other k (k not in customTilings).  For moderate k we
+      // General pattern for other k.  For moderate k we
       // compute an explicit tiling based on the shifting hole pattern and a
       // family of (k − 1)×(k − 1) big k×k blocks together with 4(k − 1) long
       // stripes.  The uncovered cells are placed one per row and
