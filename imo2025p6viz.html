@@ -5,10 +5,12 @@
   <title>IMO&nbsp;2025 Problem&nbsp;6 Visualization (Extended)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--
-    The uncovered cells are placed in a shifting pattern, the large k×k blocks are
-    positioned between these holes, and the remaining squares are partitioned
-    into long horizontal and vertical stripes.  This yields exactly k² + 2k − 3
-    tiles, in accordance with the formula below.
+    Code written by ChatGPT Agent.
+    Tiling for every k ≥ 2 computed algorithmically.
+    The uncovered cells are placed in a shifting pattern, the large k×k blocks are positioned
+    between these holes, and the remaining squares are partitioned into long horizontal
+    and vertical stripes. This yields exactly k² + 2k − 3 tiles, in accordance with the
+    formula below. The exploration stops at k = 6 to ensure clarity and performance.
 
     The minimum number of rectangular tiles needed to cover an n×n grid so that
     each row and column contains exactly one uncovered unit square is given by
@@ -167,11 +169,11 @@
     <img src="imo_header.png" alt="" class="header-image" />
     <h1>IMO 2025 Problem 6 Visualization</h1>
     <p>Consider a 2025 × 2025 grid of unit squares. Matlida wishes to place on the grid some rectangular tiles, possibly of different sizes, such that each side of every tile lies on a grid line and every unit square is covered by at most one tile. Determine the minimum number of tiles Matlida needs to place so that each row and each column of the grid has exactly one unit square that is not covered by any tile.</p>
-    <p>This visualization helps you explore the solution. The problem asks for the minimum number of rectangular tiles needed to cover an n×n grid so that every row and column has exactly one uncovered unit square. In this extended version you can explore values of k up to 5 (recall n = k², so n = 25 corresponds to k = 5).</p>
+    <p>This visualization helps you explore the solution. The problem asks for the minimum number of rectangular tiles needed to cover an n×n grid so that every row and column has exactly one uncovered unit square. In this extended version you can explore values of k up to 6 (recall n = k², so n = 36 corresponds to k = 6).</p>
     <div class="controls">
       <label for="kInput">Choose the block size k (where n = k<sup>2</sup>):</label>
-      <!-- Allow k up to 5.  Minimum 1 to see the trivial cases.  Default 2 shows the smallest nontrivial tiling. -->
-      <input id="kInput" type="range" min="2" max="5" value="2" step="1" oninput="updateGrid()" />
+      <!-- Allow k up to 6.  Minimum 2 shows the smallest nontrivial tiling; values above 6 are not displayed in this version. -->
+      <input id="kInput" type="range" min="2" max="6" value="2" step="1" oninput="updateGrid()" />
       <span id="kValue">2</span>
     </div>
     <div id="grid"></div>
@@ -200,8 +202,11 @@
       const n = k * k;
       const gridDiv = document.getElementById('grid');
       gridDiv.innerHTML = '';
-      // For small k (≤10) draw each unit cell at 20 px.  For large k scale down.
-      const blockThreshold = 10;
+      // For small k (≤6) draw every unit cell and compute an explicit tiling.
+      // For larger k the grid is compressed to a k×k representation to
+      // maintain performance.  This threshold prevents the heavier tiling
+      // algorithm from running for k ≥ 7.
+      const blockThreshold = 6;
       let cellSize;
       if (k > blockThreshold) {
         cellSize = Math.max(4, Math.floor(800 / k));
@@ -212,67 +217,8 @@
       gridDiv.style.width = (cellSize * (k > blockThreshold ? k : n)) + 'px';
 
       let tileCount;
-      const customTilings = {
-        2: {
-          n: 4,
-          holes: ['0,1','1,3','2,0','3,2'],
-          mapping: {
-            '1,1':0,'1,2':0,'2,1':0,'2,2':0,
-            '0,0':1,'1,0':1,
-            '0,2':2,'0,3':2,
-            '2,3':3,'3,3':3,
-            '3,0':4,'3,1':4
-          },
-          tileCount: 5
-        },
-        3: {
-          n: 9,
-          holes: ['0,2','1,5','2,8','3,1','4,4','5,7','6,0','7,3','8,6'],
-          mapping: {
-            '1,2':0,'1,3':0,'1,4':0,'2,2':0,'2,3':0,'2,4':0,'3,2':0,'3,3':0,'3,4':0,
-            '2,5':1,'2,6':1,'3,5':1,'3,6':1,'4,5':1,'4,6':1,'2,7':1,'3,7':1,'4,7':1,
-            '4,1':2,'4,2':2,'4,3':2,'5,1':2,'5,2':2,'5,3':2,'6,1':2,'6,2':2,'6,3':2,
-            '5,4':3,'5,5':3,'5,6':3,'6,4':3,'6,5':3,'6,6':3,'7,4':3,'7,5':3,'7,6':3,
-            '0,0':4,'1,0':4,'2,0':4,'3,0':4,'4,0':4,'5,0':4,
-            '0,1':5,'1,1':5,'2,1':5,
-            '0,3':6,'0,4':6,'0,5':6,'0,6':6,'0,7':6,'0,8':6,
-            '1,6':7,'1,7':7,'1,8':7,
-            '3,8':8,'4,8':8,'5,8':8,'6,8':8,'7,8':8,'8,8':8,
-            '6,7':9,'7,7':9,'8,7':9,
-            '7,0':10,'7,1':10,'7,2':10,
-            '8,0':11,'8,1':11,'8,2':11,'8,3':11,'8,4':11,'8,5':11
-          },
-          tileCount: 12
-        },
-        4: {
-          n: 16,
-          holes: ['0,3','1,7','2,11','3,15','4,2','5,6','6,10','7,14','8,1','9,5','10,9','11,13','12,0','13,4','14,8','15,12'],
-          mapping: {
-            '1,3':0,'1,4':0,'1,5':0,'1,6':0,'2,3':0,'2,4':0,'2,5':0,'2,6':0,'3,3':0,'3,4':0,'3,5':0,'3,6':0,'4,3':0,'4,4':0,'4,5':0,'4,6':0,
-            '2,7':1,'2,8':1,'2,9':1,'2,10':1,'3,7':1,'3,8':1,'3,9':1,'3,10':1,'4,7':1,'4,8':1,'4,9':1,'4,10':1,'5,7':1,'5,8':1,'5,9':1,'5,10':1,
-            '3,11':2,'3,12':2,'3,13':2,'3,14':2,'4,11':2,'4,12':2,'4,13':2,'4,14':2,'5,11':2,'5,12':2,'5,13':2,'5,14':2,'6,11':2,'6,12':2,'6,13':2,'6,14':2,
-            '5,2':3,'5,3':3,'5,4':3,'5,5':3,'6,2':3,'6,3':3,'6,4':3,'6,5':3,'7,2':3,'7,3':3,'7,4':3,'7,5':3,'8,2':3,'8,3':3,'8,4':3,'8,5':3,
-            '6,6':4,'6,7':4,'6,8':4,'6,9':4,'7,6':4,'7,7':4,'7,8':4,'7,9':4,'8,6':4,'8,7':4,'8,8':4,'8,9':4,'9,6':4,'9,7':4,'9,8':4,'9,9':4,
-            '7,10':5,'7,11':5,'7,12':5,'7,13':5,'8,10':5,'8,11':5,'8,12':5,'8,13':5,'9,10':5,'9,11':5,'9,12':5,'9,13':5,'10,10':5,'10,11':5,'10,12':5,'10,13':5,
-            '9,1':6,'9,2':6,'9,3':6,'9,4':6,'10,1':6,'10,2':6,'10,3':6,'10,4':6,'11,1':6,'11,2':6,'11,3':6,'11,4':6,'12,1':6,'12,2':6,'12,3':6,'12,4':6,
-            '10,5':7,'10,6':7,'10,7':7,'10,8':7,'11,5':7,'11,6':7,'11,7':7,'11,8':7,'12,5':7,'12,6':7,'12,7':7,'12,8':7,'13,5':7,'13,6':7,'13,7':7,'13,8':7,
-            '11,9':8,'11,10':8,'11,11':8,'11,12':8,'12,9':8,'12,10':8,'12,11':8,'12,12':8,'13,9':8,'13,10':8,'13,11':8,'13,12':8,'14,9':8,'14,10':8,'14,11':8,'14,12':8,
-            '0,0':9,'1,0':9,'2,0':9,'3,0':9,'4,0':9,'5,0':9,'6,0':9,'7,0':9,'8,0':9,'9,0':9,'10,0':9,'11,0':9,
-            '0,1':10,'1,1':10,'2,1':10,'3,1':10,'4,1':10,'5,1':10,'6,1':10,'7,1':10,
-            '0,2':11,'1,2':11,'2,2':11,'3,2':11,
-            '0,4':12,'0,5':12,'0,6':12,'0,7':12,'0,8':12,'0,9':12,'0,10':12,'0,11':12,'0,12':12,'0,13':12,'0,14':12,'0,15':12,
-            '1,8':13,'1,9':13,'1,10':13,'1,11':13,'1,12':13,'1,13':13,'1,14':13,'1,15':13,
-            '2,12':14,'2,13':14,'2,14':14,'2,15':14,
-            '4,15':15,'5,15':15,'6,15':15,'7,15':15,'8,15':15,'9,15':15,'10,15':15,'11,15':15,'12,15':15,'13,15':15,'14,15':15,'15,15':15,
-            '8,14':16,'9,14':16,'10,14':16,'11,14':16,'12,14':16,'13,14':16,'14,14':16,
-            '12,13':17,'13,13':17,'14,13':17,'15,13':17,'15,14':20,
-            '13,0':18,'13,1':18,'13,2':18,'13,3':18,
-            '14,0':19,'14,1':19,'14,2':19,'14,3':19,'14,4':19,'14,5':19,'14,6':19,'14,7':19,
-            '15,0':20,'15,1':20,'15,2':20,'15,3':20,'15,4':20,'15,5':20,'15,6':20,'15,7':20,'15,8':20,'15,9':20,'15,10':20,'15,11':20
-          },
-          tileCount: 21
-        }
-      };
+      // The general algorithm below computes the tiling for all k≥2.
+      const customTilings = {};
 
       if (customTilings[k]) {
         const tiling = customTilings[k];
@@ -315,10 +261,10 @@
         }
         return;
       }
-      // General pattern for other k.  For moderate k we
-      // compute an explicit tiling based on the shifting hole pattern and a
+      // For moderate k we compute an explicit tiling based on the shifting hole pattern and a
       // family of (k − 1)×(k − 1) big k×k blocks together with 4(k − 1) long
-      // stripes.  The uncovered cells are placed one per row and
+      // stripes.  This arrangement matches the combinatorial structure used in
+      // the official solution: the uncovered cells are placed one per row and
       // column in a shifted (non‑diagonal) pattern, the k×k squares are placed
       // between the holes, and the remaining cells are partitioned into
       // horizontal and vertical stripes.  The total number of tiles is
@@ -362,8 +308,7 @@
         }
         return;
       }
-      // For moderate k (including k = 5) draw every unit cell and compute the
-      // tiling explicitly.
+      // For moderate k draw every unit cell and compute the tiling explicitly.
       // Precompute the column of the uncovered cell for each row.
       const holeCol = new Array(n);
       for (let r = 0; r < n; r++) {
@@ -428,10 +373,11 @@
         }
       }
       // Determine how many of the first colours should be reserved for block tiles.
-      // We extend the lookup with k = 5 entry to ensure that block tiles use
-      // distinct colours.
+      // Ensure that block tiles use distinct colours.
+      // Number of big square tiles is (k−1)².  We provide explicit entries
+      // for small k but fall back to this formula for larger k.
       const blockTileCountLookup = {2: 1, 3: 4, 4: 9, 5: 16};
-      const blockTileCount = blockTileCountLookup[k] || 0;
+      const blockTileCount = blockTileCountLookup[k] || ((k - 1) * (k - 1));
       const totalTiles = (k - 1) * (k - 1) + 4 * (k - 1);
       // Construct the tile colour array: assign the first blockTileCount colours
       // from the palette to the square tiles and then cycle through the palette
