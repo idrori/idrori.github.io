@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Interactive IMO 2025 Problem 6 Visualizer</title>
+  <!-- Responsive viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -37,32 +39,178 @@
       margin-top: 2em;
       max-width: 800px;
     }
+    /* New modern styling overrides */
+    /* Base styling */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.5;
+    }
+    h1 {
+      margin: 0;
+      margin-bottom: 0.5em;
+      font-size: 2em;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #ffffff;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    .header-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: -1.5em -1.5em 1em -1.5em;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    .controls label {
+      margin-right: 0.5em;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .controls input[type='range'] {
+      flex: 1;
+      min-width: 120px;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #dfe6ed;
+      outline: none;
+    }
+    .controls input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1f78b4;
+      cursor: pointer;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+    .controls input[type='range']::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1f78b4;
+      cursor: pointer;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+    #kValue {
+      font-weight: 600;
+      margin-left: 0.5em;
+      color: #1f78b4;
+    }
+    #grid {
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 1em;
+      margin-left: auto;
+      margin-right: auto;
+      overflow-x: auto;
+      max-width: 100%;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .cell {
+      width: 20px;
+      height: 20px;
+      box-sizing: border-box;
+      border: 1px solid #f0f0f0;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .legend {
+      margin-top: 1em;
+      font-size: 0.9em;
+    }
+    .legend div {
+      margin-bottom: 0.3em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .info {
+      margin-top: 2em;
+      max-width: 100%;
+    }
+    #tileCount {
+      font-weight: 600;
+      color: #1f78b4;
+      margin-top: 0.5em;
+      font-size: 1.1em;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6em;
+      }
+      .container {
+        margin: 1em auto;
+        padding: 1em;
+      }
+      .controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .controls label {
+        margin-bottom: 0.3em;
+      }
+      .controls input[type='range'] {
+        width: 100%;
+      }
+      .info {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>IMO 2025 Problem 6 Visualizer</h1>
-  <p>This interactive tool helps you explore the solution to problem 6 from the 2025 International Mathematical Olympiad. The problem asks for the minimum number of rectangular tiles needed to cover an n×n grid so that every row and column has exactly one uncovered unit square.</p>
+  <div class="container">
+    <img src="imo_header.png" alt="" class="header-image">
+    <h1>IMO 2025 Problem 6 Visualizer</h1>
+    <p>This interactive tool helps you explore the solution to problem 6 from the 2025 International Mathematical Olympiad. The problem asks for the minimum number of rectangular tiles needed to cover an n×n grid so that every row and column has exactly one uncovered unit square.</p>
 
-  <div class="controls">
+    <div class="controls">
     <label for="kInput">Choose the block size k (where n = k<sup>2</sup>):</label>
     <!-- Restrict k to small values (1–4) to visualise correct patterns for k=2,3,4 -->
     <input id="kInput" type="range" min="1" max="4" value="2" step="1" oninput="updateGrid()">
     <span id="kValue">2</span>
-  </div>
+    </div>
 
-  <div id="grid"></div>
+    <div id="grid"></div>
 
-  <div class="legend">
-    <div><span style="display:inline-block;width:18px;height:18px;background:#ffffff;border:1px solid #333;margin-right:0.5em;"></span> Uncovered cell (one per row and column)</div>
-  </div>
+    <div class="legend">
+      <div><span style="display:inline-block;width:18px;height:18px;background:#ffffff;border:1px solid #333;margin-right:0.5em;"></span> Uncovered cell (one per row and column)</div>
+    </div>
 
-  <div class="info">
+    <div class="info">
      <p>The minimum number of tiles needed for an n×n grid is given by<br>
       T(n) = n + 2&nbsp;floor(√n)&nbsp;−&nbsp;3.<br>
       When n is a perfect square, n = k<sup>2</sup>, this simplifies to T(n) = k<sup>2</sup> + 2k − 3.  The formula is displayed below for the chosen k.</p>
     <p id="tileCount"></p>
    <p>This visualizer focuses on the case where n is a perfect square (choose k using the slider). The structures you see here generalize to larger grids.</p>
-  </div>
+    </div>
+  </div> <!-- end container -->
 
   <script>
     // Predefined colour palette for off-diagonal blocks
