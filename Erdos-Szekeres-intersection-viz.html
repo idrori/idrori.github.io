@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Erdős–Szekeres intersection property visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.5;
+    }
+    h1 {
+      margin: 0;
+      margin-bottom: 0.5em;
+      font-size: 2em;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #ffffff;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    .header-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: -1.5em -1.5em 1em -1.5em;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    .controls label {
+      margin-right: 0.5em;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .controls input[type='range'] {
+      flex: 1;
+      min-width: 120px;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #dfe6ed;
+      outline: none;
+    }
+    .controls input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #e64a19;
+      cursor: pointer;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+    .controls input[type='range']::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #e64a19;
+      cursor: pointer;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+    #kValue {
+      font-weight: 600;
+      margin-left: 0.5em;
+      color: #e64a19;
+    }
+    #scatter {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      border: 1px solid #ccc;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      background: #ffffff;
+    }
+    .point {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid #999;
+      background: #dddddd;
+      transform: translate(-6px, -6px);
+    }
+    .point.lis2 {
+      background: #4fc3f7;
+    }
+    .point.lds2 {
+      background: #ffb74d;
+    }
+    .point.both2 {
+      background: #ab47bc;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #eee;
+      padding: 0.3em 0.5em;
+      text-align: center;
+      font-size: 0.85em;
+    }
+    th {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+    .info {
+      margin-top: 1em;
+      font-size: 0.9em;
+    }
+    .info strong {
+      color: #e64a19;
+    }
+    .legend {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      font-size: 0.8em;
+    }
+    .legend-item {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 0.4em;
+    }
+    .legend-item.lis2 {
+      background: #4fc3f7;
+      border: 1px solid #4fc3f7;
+    }
+    .legend-item.lds2 {
+      background: #ffb74d;
+      border: 1px solid #ffb74d;
+    }
+    .legend-item.both2 {
+      background: #ab47bc;
+      border: 1px solid #ab47bc;
+    }
+    .legend-item.other {
+      background: #dddddd;
+      border: 1px solid #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="imo_header.png" alt="" class="header-image">
+    <h1>Erdős–Szekeres intersection property visualization</h1>
+    <p>If the product of the lengths of the longest increasing subsequence (LIS) and longest decreasing subsequence (LDS) of a permutation equals the length of the permutation (<em>a·b = k</em>), then one can choose an LIS of length <em>a</em> and an LDS of length <em>b</em> that share a common element.  When <em>a·b = k</em>, every pair of labels <em>(a<sub>i</sub>,b<sub>i</sub>)</em> appears exactly once.  A suitable LIS is obtained by taking elements with <em>b<sub>i</sub>=1</em> in order of increasing <em>a<sub>i</sub></em>; a suitable LDS is obtained by taking elements with <em>a<sub>i</sub>=1</em> in order of increasing <em>b<sub>i</sub></em>.  These two subsequences intersect at the element labelled <em>(1,1)</em>.</p>
+    <div class="controls">
+      <label for="kInput">Choose k (sequence length):</label>
+      <input id="kInput" type="range" min="4" max="12" value="6" step="1" oninput="updatePermutation()">
+      <span id="kValue">6</span>
+    </div>
+    <div id="scatter"></div>
+    <div class="legend">
+      <div class="legend-item lis2"></div><span>Intersection property for LIS</span>
+      <div class="legend-item lds2"></div><span>Intersection property for LDS</span>
+      <div class="legend-item both2"></div><span>Intersection</span>
+      <div class="legend-item other"></div><span>Other</span>
+    </div>
+    <table id="permutationTable">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Value</th>
+          <th>LIS length<br>(a<sub>i</sub>)</th>
+          <th>LDS length<br>(b<sub>i</sub>)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="info" id="info"></div>
+  </div>
+  <script>
+    let permutation = [];
+    function generatePattern(k) {
+      // choose factors a and b such that a <= b and a*b = k
+      let a = Math.floor(Math.sqrt(k));
+      while (a > 1 && k % a !== 0) {
+        a--;
+      }
+      if (k % a !== 0) {
+        // fallback to trivial case a=1, b=k
+        a = 1;
+      }
+      const b = k / a;
+      const pattern = [];
+      for (let i = 0; i < a; i++) {
+        for (let j = b; j >= 1; j--) {
+          pattern.push(i * b + j);
+        }
+      }
+      return { pattern, a, b };
+    }
+    function computeLisLds(arr) {
+      const n = arr.length;
+      const lis = new Array(n).fill(1);
+      const lds = new Array(n).fill(1);
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+          if (arr[j] < arr[i] && lis[j] + 1 > lis[i]) {
+            lis[i] = lis[j] + 1;
+          }
+          if (arr[j] > arr[i] && lds[j] + 1 > lds[i]) {
+            lds[i] = lds[j] + 1;
+          }
+        }
+      }
+      let a = 1;
+      let b = 1;
+      for (let i = 0; i < n; i++) {
+        if (lis[i] > a) a = lis[i];
+        if (lds[i] > b) b = lds[i];
+      }
+      return { lisLengths: lis, ldsLengths: lds, a, b };
+    }
+    function updatePermutation() {
+      const kInput = document.getElementById('kInput');
+      const k = parseInt(kInput.value);
+      document.getElementById('kValue').textContent = k;
+      const { pattern, a: factorA, b: factorB } = generatePattern(k);
+      permutation = pattern;
+      updateVisualization(factorA, factorB);
+    }
+    function updateVisualization(factorA, factorB) {
+      const { lisLengths, ldsLengths, a, b } = computeLisLds(permutation);
+      const scatter = document.getElementById('scatter');
+      scatter.innerHTML = '';
+      const width = scatter.clientWidth;
+      const height = scatter.clientHeight;
+      const n = permutation.length;
+      // compute propery for LIS (elements with b_i == 1, sorted by a_i)
+      const lisCandidates = [];
+      for (let i = 0; i < n; i++) {
+        if (ldsLengths[i] === 1) lisCandidates.push(i);
+      }
+      lisCandidates.sort((i, j) => lisLengths[i] - lisLengths[j]);
+      // compute property for LDS (elements with a_i == 1, sorted by b_i)
+      const ldsCandidates = [];
+      for (let i = 0; i < n; i++) {
+        if (lisLengths[i] === 1) ldsCandidates.push(i);
+      }
+      ldsCandidates.sort((i, j) => ldsLengths[i] - ldsLengths[j]);
+      // set of indices for quick lookup
+      const lisSet = new Set(lisCandidates);
+      const ldsSet = new Set(ldsCandidates);
+      // draw points
+      for (let i = 0; i < n; i++) {
+        const value = permutation[i];
+        const x = (i / (n - 1)) * (width - 20) + 10;
+        const y = ((n - 1 - (value - 1)) / (n - 1)) * (height - 20) + 10;
+        const pt = document.createElement('div');
+        pt.className = 'point';
+        const inLis2 = lisSet.has(i);
+        const inLds2 = ldsSet.has(i);
+        if (inLis2 && inLds2) {
+          pt.classList.add('both2');
+        } else if (inLis2) {
+          pt.classList.add('lis2');
+        } else if (inLds2) {
+          pt.classList.add('lds2');
+        }
+        pt.style.left = x + 'px';
+        pt.style.top = y + 'px';
+        pt.title = `index ${i}, value ${value}\nLIS length a_i = ${lisLengths[i]}\nLDS length b_i = ${ldsLengths[i]}`;
+        scatter.appendChild(pt);
+      }
+      // fill table
+      const tbody = document.getElementById('permutationTable').querySelector('tbody');
+      tbody.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        const tr = document.createElement('tr');
+        const tdIndex = document.createElement('td');
+        tdIndex.textContent = i;
+        const tdValue = document.createElement('td');
+        tdValue.textContent = permutation[i];
+        const tdLis = document.createElement('td');
+        tdLis.textContent = lisLengths[i];
+        const tdLds = document.createElement('td');
+        tdLds.textContent = ldsLengths[i];
+        // highlight rows belonging to subsequences
+        if (lisSet.has(i)) tr.style.background = '#e7f4fb';
+        if (ldsSet.has(i)) tr.style.background = '#fff4e6';
+        if (lisSet.has(i) && ldsSet.has(i)) tr.style.background = '#f3e8f8';
+        tr.appendChild(tdIndex);
+        tr.appendChild(tdValue);
+        tr.appendChild(tdLis);
+        tr.appendChild(tdLds);
+        tbody.appendChild(tr);
+      }
+      // info text
+      const info = document.getElementById('info');
+      info.innerHTML = '';
+      const p1 = document.createElement('p');
+      p1.innerHTML = `Permutation: [${permutation.join(', ')}]`;
+      const p2 = document.createElement('p');
+      p2.innerHTML = `Computed LIS length a = <strong>${a}</strong>, LDS length b = <strong>${b}</strong>, with product a·b = <strong>${a * b}</strong> (should equal k = <strong>${n}</strong>).`;
+      const intersects = lisCandidates.find(i => ldsSet.has(i));
+      const p3 = document.createElement('p');
+      if (intersects !== undefined) {
+        p3.innerHTML = `Subsequences intersect at index <strong>${intersects}</strong> with value <strong>${permutation[intersects]}</strong> (labelled (a_i,b_i) = (${lisLengths[intersects]},${ldsLengths[intersects]})).`;
+      } else {
+        p3.innerHTML = `No intersection found for the constructed subsequences.`;
+      }
+      info.appendChild(p1);
+      info.appendChild(p2);
+      info.appendChild(p3);
+    }
+    window.onload = () => {
+      updatePermutation();
+    };
+  </script>
+</body>
+</html>

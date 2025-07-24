@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Erdős–Szekeres bound visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.5;
+    }
+    h1 {
+      margin: 0;
+      margin-bottom: 0.5em;
+      font-size: 2em;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #ffffff;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    .header-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: -1.5em -1.5em 1em -1.5em;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    .controls label {
+      margin-right: 0.5em;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .controls input[type='range'] {
+      flex: 1;
+      min-width: 120px;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #dfe6ed;
+      outline: none;
+    }
+    .controls input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1f78b4;
+      cursor: pointer;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+    .controls input[type='range']::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1f78b4;
+      cursor: pointer;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    }
+    #kValue {
+      font-weight: 600;
+      margin-left: 0.5em;
+      color: #1f78b4;
+    }
+    #scatter {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      border: 1px solid #ccc;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      background: #ffffff;
+    }
+    .legend {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      font-size: 0.8em;
+    }
+    .legend-item {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 0.4em;
+    }
+    .legend-item.lis {
+      background: #6abf69;
+      border: 1px solid #6abf69;
+    }
+    .legend-item.lds {
+      background: #e16a6a;
+      border: 1px solid #e16a6a;
+    }
+    .legend-item.both {
+      background: #a970e5;
+      border: 1px solid #a970e5;
+    }
+    .legend-item.other {
+      background: #dddddd;
+      border: 1px solid #999;
+    }
+    .point {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid #999;
+      background: #dddddd;
+      transform: translate(-6px, -6px);
+    }
+    .point.lis {
+      background: #6abf69;
+    }
+    .point.lds {
+      background: #e16a6a;
+    }
+    .point.both {
+      background: #a970e5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #eee;
+      padding: 0.3em 0.5em;
+      text-align: center;
+      font-size: 0.85em;
+    }
+    th {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+    .info {
+      margin-top: 1em;
+      font-size: 0.9em;
+    }
+    .info strong {
+      color: #1f78b4;
+    }
+    button {
+      padding: 0.4em 0.8em;
+      background: #1f78b4;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #155a8a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="imo_header.png" alt="" class="header-image">
+    <h1>Erdős–Szekeres bound visualization</h1>
+    <p>Given a permutation of <em>{1,…,k}</em>, let <em>a</em> and <em>b</em> be the lengths of the longest increasing and decreasing subsequences (LIS and LDS) of the permutation.  The bound is that <em>a·b ≥ k</em>.  This follows because every element gets a label <em>(a<sub>i</sub>,b<sub>i</sub>)</em> describing the lengths of the LIS and LDS ending at that element, and these labels are all distinct.  The Erdős–Szekeres theorem generalises this: any sequence of length <em>(a−1)(b−1)+1</em> has either an increasing subsequence of length <em>a</em> or a decreasing subsequence of length <em>b</em>.</p>
+    <div class="controls">
+      <label for="kInput">Choose k (size of permutation):</label>
+      <input id="kInput" type="range" min="4" max="10" value="6" step="1" oninput="updateVisualization()">
+      <span id="kValue">6</span>
+      <button onclick="randomizePermutation()">Shuffle</button>
+    </div>
+    <div id="scatter"></div>
+    <div class="legend">
+      <div class="legend-item lis"></div><span>In LIS</span>
+      <div class="legend-item lds"></div><span>In LDS</span>
+      <div class="legend-item both"></div><span>In LIS &amp; LDS</span>
+      <div class="legend-item other"></div><span>Other</span>
+    </div>
+    <table id="permutationTable">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Value</th>
+          <th>LIS length<br>(a<sub>i</sub>)</th>
+          <th>LDS length<br>(b<sub>i</sub>)</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div class="info" id="info"></div>
+  </div>
+  <script>
+    let permutation = [];
+    function randomizePermutation() {
+      const kInput = document.getElementById('kInput');
+      const k = parseInt(kInput.value);
+      permutation = shuffle([...Array(k).keys()]);
+      updateVisualization();
+    }
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    function computeLisLds(arr) {
+      const n = arr.length;
+      const lis = new Array(n).fill(1);
+      const lisPrev = new Array(n).fill(-1);
+      let lisMax = 1;
+      let lisEnd = 0;
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+          if (arr[j] < arr[i] && lis[j] + 1 > lis[i]) {
+            lis[i] = lis[j] + 1;
+            lisPrev[i] = j;
+          }
+        }
+        if (lis[i] > lisMax) {
+          lisMax = lis[i];
+          lisEnd = i;
+        }
+      }
+      // reconstruct one LIS
+      const lisIndices = [];
+      let cur = lisEnd;
+      while (cur !== -1) {
+        lisIndices.push(cur);
+        cur = lisPrev[cur];
+      }
+      lisIndices.reverse();
+      // compute LDS (decreasing subsequence lengths and one sequence)
+      const lds = new Array(n).fill(1);
+      const ldsPrev = new Array(n).fill(-1);
+      let ldsMax = 1;
+      let ldsEnd = 0;
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+          if (arr[j] > arr[i] && lds[j] + 1 > lds[i]) {
+            lds[i] = lds[j] + 1;
+            ldsPrev[i] = j;
+          }
+        }
+        if (lds[i] > ldsMax) {
+          ldsMax = lds[i];
+          ldsEnd = i;
+        }
+      }
+      // reconstruct one LDS
+      const ldsIndices = [];
+      cur = ldsEnd;
+      while (cur !== -1) {
+        ldsIndices.push(cur);
+        cur = ldsPrev[cur];
+      }
+      ldsIndices.reverse();
+      return { lisLengths: lis, ldsLengths: lds, lisIndices, ldsIndices, a: lisMax, b: ldsMax };
+    }
+    function updateVisualization() {
+      const kInput = document.getElementById('kInput');
+      const k = parseInt(kInput.value);
+      document.getElementById('kValue').textContent = k;
+      if (permutation.length !== k) {
+        permutation = shuffle([...Array(k).keys()]);
+      }
+      const { lisLengths, ldsLengths, lisIndices, ldsIndices, a, b } = computeLisLds(permutation);
+      const scatter = document.getElementById('scatter');
+      // clear scatter
+      scatter.innerHTML = '';
+      const scatterWidth = scatter.clientWidth;
+      const scatterHeight = scatter.clientHeight;
+      const n = permutation.length;
+      // compute positions and create points
+      for (let i = 0; i < n; i++) {
+        const value = permutation[i];
+        const x = (i / (n - 1)) * (scatterWidth - 20) + 10;
+        const y = ((n - 1 - value) / (n - 1)) * (scatterHeight - 20) + 10;
+        const point = document.createElement('div');
+        point.className = 'point';
+        // determine class
+        const inLis = lisIndices.includes(i);
+        const inLds = ldsIndices.includes(i);
+        if (inLis && inLds) {
+          point.classList.add('both');
+        } else if (inLis) {
+          point.classList.add('lis');
+        } else if (inLds) {
+          point.classList.add('lds');
+        }
+        point.style.left = x + 'px';
+        point.style.top = y + 'px';
+        // optional title
+        point.title = `index ${i}, value ${value}\nLIS length a_i = ${lisLengths[i]}\nLDS length b_i = ${ldsLengths[i]}`;
+        scatter.appendChild(point);
+      }
+      // fill table
+      const tbody = document.getElementById('permutationTable').querySelector('tbody');
+      tbody.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        const tr = document.createElement('tr');
+        const tdIndex = document.createElement('td');
+        tdIndex.textContent = i;
+        const tdValue = document.createElement('td');
+        tdValue.textContent = permutation[i];
+        const tdLis = document.createElement('td');
+        tdLis.textContent = lisLengths[i];
+        const tdLds = document.createElement('td');
+        tdLds.textContent = ldsLengths[i];
+        // highlight rows on LIS or LDS
+        if (lisIndices.includes(i)) tr.style.background = '#eef7f0';
+        if (ldsIndices.includes(i)) tr.style.background = '#f9ecec';
+        if (lisIndices.includes(i) && ldsIndices.includes(i)) tr.style.background = '#f3eaf9';
+        tr.appendChild(tdIndex);
+        tr.appendChild(tdValue);
+        tr.appendChild(tdLis);
+        tr.appendChild(tdLds);
+        tbody.appendChild(tr);
+      }
+      // compute distinct labels
+      const labels = new Set();
+      for (let i = 0; i < n; i++) {
+        labels.add(lisLengths[i] + ',' + ldsLengths[i]);
+      }
+      const distinctCount = labels.size;
+      const info = document.getElementById('info');
+      info.innerHTML = '';
+      const p1 = document.createElement('p');
+      p1.innerHTML = `Permutation: [${permutation.join(', ')}]`;
+      const p2 = document.createElement('p');
+      p2.innerHTML = `Longest increasing subsequence length a = <strong>${a}</strong>, longest decreasing subsequence length b = <strong>${b}</strong>.`;
+      const p3 = document.createElement('p');
+      p3.innerHTML = `Product a·b = <strong>${a * b}</strong>, sequence length k = <strong>${n}</strong>. Thus <strong>a·b \u2265 k</strong>: ${a * b >= n}`;
+      const p4 = document.createElement('p');
+      p4.innerHTML = `Distinct labels (a_i,b_i) across all elements = <strong>${distinctCount}</strong>. Since there are <em>a</em> possible values for a_i and <em>b</em> possible values for b_i, there are <em>a·b</em> distinct labels; therefore, <em>a·b \u2265 k</em>.`;
+      info.appendChild(p1);
+      info.appendChild(p2);
+      info.appendChild(p3);
+      info.appendChild(p4);
+    }
+    window.onload = () => {
+      randomizePermutation();
+    };
+  </script>
+</body>
+</html>
