@@ -468,6 +468,34 @@ footer {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Academic Service */
+.academic-service .service-section {
+    margin-bottom: 3rem;
+}
+
+.academic-service .service-section h2 {
+    margin-bottom: 1rem;
+}
+
+.service-list {
+    margin: 0;
+    padding-left: 1.5rem;
+    line-height: 1.7;
+}
+
+.service-list li {
+    margin-bottom: 0.5rem;
+    color: #4a4a4a;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0066cc;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .mobile-menu-button {
