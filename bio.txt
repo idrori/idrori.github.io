@@ -1,4 +1,4 @@
-Iddo Drori is an Associate Professor of Computer Science focusing on AGI.
+Iddo Drori is an Associate Professor of Computer Science focusing on artificial general intelligence.
 He has taught at Stanford, MIT, Columbia University, NYU, and BU with excellent formal evaluations. 
 He has conducted research at Cornell ORIE, MIT CSAIL, and NYU Courant Institute, School of Mathematics, Computing, and Data Science.
 He was a postdoctoral research fellow in statistics at Stanford University and holds a Ph.D. in computer science.
