@@ -1,8 +1,0 @@
-Iddo Drori is an Associate Professor of Computer Science focusing on artificial general intelligence.
-He has taught at Stanford, MIT, Columbia University, NYU, and BU with excellent formal evaluations. 
-He has conducted research at Cornell ORIE, MIT CSAIL, and NYU Courant Institute, School of Mathematics, Computing, and Data Science.
-He was a postdoctoral research fellow in statistics at Stanford University and holds a Ph.D. in computer science.
-He holds an MBA in organizational behavior and entrepreneurship, and has a decade of industry research and leadership experience.
-His main research is in AGI, for superhuman math and science, and automated scientific discovery, with over 80 publications and 7,000 citations.
-He is the author of the book 'The Science of Deep Learning' with Cambridge University Press, and a forthcoming book 'Artificial General Intelligence: Mathematical Foundations'.
-He has taught over 60 courses, has won multiple competitions in machine learning, AI, and computer vision conferences, and received multiple best paper awards.
