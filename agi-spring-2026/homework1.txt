@@ -1,3 +1,5 @@
+AGI, Spring 2026, Homework 1
+
 1. Install, build, and run Claude Code with plugins:
 curl -fsSL https://claude.ai/install.sh | bash
 claude update
@@ -12,5 +14,4 @@ Example: "build a webapp using the frontend-design plugin that does X Y Z, use t
 3. Use Age of Empires or Warcraft or other interface you like to visualize at least a dozen agents vibing.
 
 Out: 1/26/2026, due: 2/7/2026, 10 points.
-
 
