@@ -11,7 +11,8 @@ Example: "build a webapp using the frontend-design plugin that does X Y Z, use t
 
 2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.
 
-3. Use Age of Empires or Warcraft or other interface you like to visualize at least a dozen agents.
+3. Use Age of Empires / Warcraft / Starcraft II or other interface you like to visualize and manually control at least a dozen agents.
+
+4. (Optional extra credit) Use any open source repo like AlphaStar to automatically manage the agents.
 
 Out: 1/26/2026, due: 2/7/2026, 10 points.
-
