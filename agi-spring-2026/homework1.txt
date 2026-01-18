@@ -2,7 +2,7 @@
 curl -fsSL https://claude.ai/install.sh | bash
 claude update
 claude
-/plugin install frontend-desing@claude-plugins-official
+/plugin install frontend-design@claude-plugins-official
 /plugin install superpowers@claude-plugins-official
 ..
 Example: "build a webapp using the frontend-design plugin that does X Y Z, use the superpowers plugin."
