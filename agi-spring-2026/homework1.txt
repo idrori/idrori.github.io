@@ -4,9 +4,10 @@ claude update
 claude
 /plugin install frontend-desing@claude-plugins-official
 /plugin install superpowers@claude-plugins-official
-"build a webapp using the frontend-design plugin that does X Y Z, use the superpowers plugin."
+..
+Example: "build a webapp using the frontend-design plugin that does X Y Z, use the superpowers plugin."
 
-2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice for input.
+2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.
 
 3. Use Age of Empires or Warcraft or other interface you like to visualize at least a dozen agents vibing.
 
