@@ -1,15 +1,15 @@
 Reinforcement Learning, Spring 2026, Homework 1
 
-1. Few-shot learning
+1. Supervised learning
 
 Sign up for the free gemini-3 pro plan for students.
 
 a. Generate pairs: Choose 5 papers from alpharxiv.org and put each one in a separate notebooklm.google.com project.
 In each project generate an infographic, slide deck, and data table.
 
-b. Meta prompt: Upload the 5 pairs of (paper, infographic) into gemini-3-pro-preview and ask it to generate a prompt that would generate each infographic from each paper using gemini. Repeat for the (paper, slide deck) and (paper, data table) pairs, to generate three base prompts: paper2inforgraphic, paper2slides, and paper2table.
+b. Prompt: Upload the 5 pairs of (paper, infographic) into gemini-3-pro-preview and ask it to generate a prompt that would generate each infographic from each paper using gemini. Repeat for the (paper, slide deck) and (paper, data table) pairs, to generate three base prompts: paper2inforgraphic, paper2slides, and paper2table.
 
-c. Test: Chose another paper and upload it to gemini-3-pro-preview, and use each of the three base prompts to directly generate an infographic, slide deck, and data table for the paper. Modify the base prompts to generate results in your own style.
+c. Test on unseen example: Chose another paper and upload it to gemini-3-pro-preview, and use each of the three base prompts to directly generate an infographic, slide deck, and data table for the paper. Modify the base prompts to generate results in your own style.
 
 
 2. Multi-armed bandits
