@@ -6,11 +6,11 @@ Sign up for the free gemini-3 pro plan for students.
 a. Few-shot pairs: Choose 5 papers from alpharxiv.org and put each one in a separate notebooklm.google.com project.
 In each project generate an infographic, slide deck, and data table.
 
-b. Meta prompting: Upload the 5 pairs of (paper, infographic) into gemini-3-pro-preview and ask it to generate a prompt that would generate each infographic from each paper using nano banana pro. Repeat for the (paper, slide deck) and (paper, data table) pairs, to generate three base prompts: paper2inforgraphic, paper2slides, and paper2table.
+b. Meta prompting: Upload the 5 pairs of (paper, infographic) into gemini-3-pro-preview and ask it to generate a prompt that would generate each infographic from each paper using gemini. Repeat for the (paper, slide deck) and (paper, data table) pairs, to generate three base prompts: paper2inforgraphic, paper2slides, and paper2table.
 
 c. Test: Chose another paper and upload it to gemini-3-pro-preview, and use each of the three base prompts to directly generate an infographic, slide deck, and data table for the paper. Modify the base prompts to generate results in your own style.
 
-2.
+2. Multi-armed bandits
 a. Install, build, and run Claude Code with plugins:
 curl -fsSL https://claude.ai/install.sh | bash
 claude update
@@ -24,7 +24,7 @@ Install the chrome plugin.
 
 b. Prompt Claude Code to implement and test four multi-armed bandit algorithms in Python: greedy, epsilon-greedy, upper-confidence bound (UCB), Thompson posterior sampling. 
 
-c. Prompt Claude Code to build a webapp using the frontend-design plugin that is an interactive simulation which allows a user to compete with the four multi-armed bandit algorithms it implemented and tested, and use the superpowers and code-simplifier plugins to generate and clean the code.
+c. Prompt Claude Code to build a webapp using the frontend-design plugin that is an interactive simulation which allows a user to compete with the four multi-armed bandit algorithms it implemented and tested in multiple rounds and visualize the results, and use the superpowers and code-simplifier plugins to generate and clean the code.
 
 
 Out: 1/26, due: 2/5, 10 points.
