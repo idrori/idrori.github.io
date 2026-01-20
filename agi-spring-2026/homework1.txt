@@ -16,3 +16,4 @@ Example: "build a webapp using the frontend-design plugin that does X Y Z, use t
 4. (Optional extra credit) Use any open source repo like AlphaStar to automatically manage the agents.
 
 Out: 1/26/2026, due: 2/7/2026, 10 points.
+
