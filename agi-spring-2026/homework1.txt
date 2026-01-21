@@ -7,6 +7,7 @@ claude
 /plugin install frontend-design@claude-plugins-official
 /plugin install superpowers@claude-plugins-official
 ..
+/init
 Example: "build a webapp using the frontend-design plugin that does X Y Z, use the superpowers plugin."
 
 2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.

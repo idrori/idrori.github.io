@@ -23,7 +23,7 @@ claude
 /plugin install code-simplifier@claude-plugins-official
 ..
 Install the chrome plugin.
-
+/init
 
 b. Prompt Claude Code to implement and test four multi-armed bandit algorithms in Python: greedy, epsilon-greedy, upper-confidence bound (UCB), Thompson posterior sampling. 
 
