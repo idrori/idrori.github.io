@@ -1,4 +1,5 @@
 AGI, Spring 2026, Homework 1
+Prof. Iddo Drori, last updated 1/23/26
 
 1. Install, build, and run Claude Code with plugins:
 curl -fsSL https://claude.ai/install.sh | bash
