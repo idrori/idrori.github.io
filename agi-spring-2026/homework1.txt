@@ -22,7 +22,7 @@ In Claude Code: (for each project)
 /init (will read and understand the repo and the existing skills and tools)
 use the claude-code-setup plugin (will install and load new plugins, tools, and skills required for this project)
 use the superpowers plugin (will interview any expert user in any field, brainstorm, create specs and plan, and ask for permission to implement, and get an aha/wow response from the expert)
-use the strawberry toolkit (or another openai subagent, review and verify the work using a different model family)
+use codex/gemini subagent (ie strawberry toolkit etc, to review and verify the work using a different model family)
 use the claude-md-management plugin (will save the knowledge skills learnt in this session)
 /exit (will terminate the session and exit, having performed work, updated memory, and learnt new skills by the above)
 
