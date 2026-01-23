@@ -28,6 +28,8 @@ use the claude-md-management plugin (will save the knowledge, skills learnt in t
 
 Repeat 
 
+Change mindset to think about what things to do instead of how to do them
+
 
 2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.
 
