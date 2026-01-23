@@ -14,7 +14,7 @@ Example: "build a webapp using the frontend-design plugin that does X Y Z, use t
 2. Run Claude Code in a continual learning self-improvement loop:
 
 In terminal:
-claude update (good morning)
+claude update (good morning with daily updates, Claude Code is writing Claude Code)
 
 claude (do this in multiple terminals in different directories for multiple projects)
 
