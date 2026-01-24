@@ -27,9 +27,9 @@ use gpt/codex/gemini subagent (ie strawberry toolkit etc, to review and verify t
 use the claude-md-management plugin (will save the knowledge, skills learnt in this session)
 /exit (will terminate the session and exit, having performed work, updated memory, and learnt new skills by the above)
 
-Repeat 
+Once every few sessions review all: zip the directory and attach it GPT-5.2 Pro and ask it to review the data, prompts, and code and feed the review back to Claude Code
 
-Change mindset to think about what things to do instead of how to do them
+Repeat
 
 
 2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.
