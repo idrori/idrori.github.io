@@ -12,7 +12,7 @@ claude
 Example: "build a webapp using the frontend-design plugin that does X Y Z, use the superpowers plugin."
 
 
-2. Run Claude Code in a continual learning self-improvement loop:
+Run Claude Code in a continual learning self-improvement loop:
 
 In terminal:
 claude update (good morning with daily updates, Claude Code is writing Claude Code)
@@ -27,7 +27,8 @@ use gpt/codex/gemini subagent (ie strawberry toolkit etc, to review and verify t
 use the claude-md-management plugin (will save the knowledge, skills learnt in this session)
 /exit (will terminate the session and exit, having performed work, updated memory, and learnt new skills by the above)
 
-Once every few sessions review all: zip the directory and attach it GPT-5.2 Pro and ask it to review the data, prompts, and code and feed the review back to Claude Code
+Once every few sessions review all: zip the directory and attach it Gemini-3-Pro/GPT-5.2 Pro 
+and ask it to review the data, prompts, and code and feed the review back to Claude Code
 
 Repeat
 
@@ -38,5 +39,17 @@ Repeat
 
 4. (Optional extra credit) Use any open source repo like AlphaStar to automatically manage the agents.
 
+You can sign up for the free gemini-3 pro plan for students.
+
+Submission:
+Submit all deliverables (prompts, code/screenshots) on the shared class Google Drive
+under the subdirectory with your name, e.g. Homeworks/1/Your Name/
+Put everything for this homework inside your folder.
+Include a short README.md (or README.txt) at the top of your folder describing:
+what you did, where each deliverable is located, how to run your code/webapp (commands, dependencies).
+Make sure any notebooks/code run without needing your local paths (use relative paths where possible).
+Use an LLM (Gemini or GPT) to review and revise your work before submission.
+
 Out: 1/26/2026, due: 2/7/2026, 10 points.
+
 

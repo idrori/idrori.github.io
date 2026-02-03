@@ -1,10 +1,11 @@
 Reinforcement Learning, Spring 2026, Homework 1
+Instructor: Prof. Iddo Drori
 
 1. Supervised learning
 
 Sign up for the free gemini-3 pro plan for students.
 
-a. Generate pairs: Choose 5 papers from alpharxiv.org and put each one in a separate notebooklm.google.com project.
+a. Generate pairs: Choose 5 papers from alphaxiv.org and put each one in a separate notebooklm.google.com project.
 In each project generate an infographic, slide deck, and data table.
 
 b. Prompt: Upload the 5 pairs of (paper, infographic) into gemini-3-pro-preview and ask it to generate a prompt that would generate each infographic from each paper using gemini. Repeat for the (paper, slide deck) and (paper, data table) pairs, to generate three base prompts: paper2inforgraphic, paper2slides, and paper2table.
@@ -25,10 +26,18 @@ claude
 Install the chrome plugin.
 /init
 
-b. Prompt Claude Code to implement and test four multi-armed bandit algorithms in Python: greedy, epsilon-greedy, upper-confidence bound (UCB), Thompson posterior sampling. 
+b. Prompt Claude Code to implement and test four independent Bernoulli multi-armed bandit algorithms in Python: greedy, epsilon-greedy, upper-confidence bound (UCB), Thompson posterior sampling. 
 
 c. Prompt Claude Code to build a webapp using the frontend-design plugin that is an interactive simulation which allows a user to compete with the four multi-armed bandit algorithms it implemented and tested in multiple rounds and visualize the results, and use the superpowers and code-simplifier plugins to generate and clean the code.
 
+Submission:
+Submit all deliverables (data, code, prompts, and app) on the shared class Google Drive
+under the subdirectory with your name, e.g. Homeworks/1/Your Name/
+Put everything for this homework inside your folder.
+Include a short README.md (or README.txt) at the top of your folder describing:
+what you did, where each deliverable is located, how to run your code/webapp (commands, dependencies).
+Make sure any notebooks/code run without needing your local paths (use relative paths where possible).
+Use an LLM (Gemini or GPT) to review your work before submission.
 
 Out: 1/26, due: 2/5, 10 points.
 
