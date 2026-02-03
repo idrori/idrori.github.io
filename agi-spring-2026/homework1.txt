@@ -33,7 +33,7 @@ and ask it to review the data, prompts, and code and feed the review back to Cla
 Repeat
 
 
-2. Setup mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.
+2. Setup trackpad/mouse buttons to control yes/yes and don't ask again/no approvals, and voice as input.
 
 3. Use Age of Empires / Warcraft / Starcraft II or other interface you like to visualize and manually control at least a dozen agents.
 
