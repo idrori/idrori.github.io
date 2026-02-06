@@ -2,7 +2,8 @@ AGI, Spring 2026, Homework 2
 Prof. Iddo Drori, last updated 2/5/26
 
 
-In this homework, you will use a team of AI agents to work on a small open math or theoretical CS problem by vibe proving with formal verification.
+In this homework, you will use a team of AI agents to work on a small open math or theoretical CS problem 
+by a deep dive and vibe proving with formal verification.
 
 
 1. Installation and setup:
@@ -33,7 +34,7 @@ If they are not equivalent, then ask the team and agent to fix the Lean formaliz
 and repeat for 3-5 rounds, until the problem formulation both compiles, and its back translation is mathematically equivalent to the original problem.
 
 
-4. Iterative natural language proof with sub-problems:
+4. Deep dive natural language proof with sub-problems:
 Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifier prompt below only once.
 GPT will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
 Continue the conversation by responding “yes / you choose, and work on the open sub-problems.”
