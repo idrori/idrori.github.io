@@ -33,8 +33,13 @@ If they are not equivalent, then ask the team and agent to fix the Lean formaliz
 and repeat for 3-5 rounds, until the problem formulation both compiles, and its back translation is mathematically equivalent to the original problem.
 
 
-4. Natural language proof with sub-problems:
-Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifier prompt:
+4. Iterative natural language proof with sub-problems:
+Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifier prompt below only once.
+GPT will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
+Continue the conversation by responding “yes, and work on the open sub-problems.”
+Continue this for 5-10 rounds (up to ~15-30 minutes each)
+Save the entire concatenated conversation (~2-3 hours) into a solution.txt file.
+
 
 Problem Solver
 
@@ -102,10 +107,6 @@ Result
 * Open sub-problems: [If applicable, specific sub-problems whose resolution would complete the proof.]
 
 
-GPT-5.2 Extended thinking will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
-Respond “yes, and work on the open sub-problems.”
-Repeat for 5 rounds (up to ~15-30 minutes each)
-Save the entire concatenated conversation (~2 hours) into a solution.txt file.
 
 
 5. Proof:
