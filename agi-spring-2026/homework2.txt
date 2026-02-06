@@ -96,6 +96,7 @@ Result
 * What is proved: [One sentence stating your strongest unconditional result, or “No new result beyond known bounds.”]
 * Open sub-problems: [If applicable, specific sub-problems whose resolution would complete the proof.]
 
+
 GPT-5.2 Extended thinking will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
 Respond “yes, and work on the open sub-problems.”
 Repeat for 3-5 rounds (up to ~15-30 minutes each)
