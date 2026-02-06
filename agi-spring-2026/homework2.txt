@@ -2,7 +2,7 @@ AGI, Spring 2026, Homework 2
 Prof. Iddo Drori, last updated 2/5/26
 
 
-In this homework, you will use AI to work on an open math or theoretical CS problem by vibe proving with formal verification.
+In this homework, you will use AI to work on a small open math or theoretical CS problem by vibe proving with formal verification.
 
 
 1. Installation:
@@ -19,7 +19,7 @@ Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 
 
 3. Autoformalization with cycle consistency:
-Choose an open problem in natural language (into problem.txt)
+Choose a small open problem in natural language (into problem.txt)
 Ask Claude Code to use the agent to formalize the problem in Lean (into problem.lean)
 Ask Claude Code to check that the Lean compiles
 Ask Claude Code to back translate the compiled Lean into natural language (into problem.lean-nl.txt)
