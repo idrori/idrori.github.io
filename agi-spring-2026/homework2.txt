@@ -39,7 +39,7 @@ Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifie
 
 ## Instructions
 
-You are solving an open problem. These are long-standing unsolved problems — most have resisted expert attack for decades. A rigorous partial result or a well-documented failure is more valuable than a fake proof.
+You are solving an open problem. These are long-standing unsolved problems — most have resisted expert attack for years. A rigorous partial result or a well-documented failure is more valuable than a fake proof.
 
 ### What to do
 
