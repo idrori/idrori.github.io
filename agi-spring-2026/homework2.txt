@@ -19,7 +19,7 @@ Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 
 
 3. Autoformalization with cycle consistency:
-Chose and open problem in natural language (into problem.txt)
+Chose an open problem in natural language (into problem.txt)
 Ask Claude Code to use the agent to formalize the problem in Lean (into problem.lean)
 Ask Claude Code to check it the Lean compiles
 Ask Claude Code to back translate the compiled Lean into natural language (into problem.lean-nl.txt) 
