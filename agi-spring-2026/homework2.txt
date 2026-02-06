@@ -2,7 +2,7 @@ AGI, Spring 2026, Homework 2
 Prof. Iddo Drori, last updated 2/5/26
 
 
-In this homework, you will use AI to work on a small open math or theoretical CS problem by vibe proving with formal verification.
+In this homework, you will use a team of AI agents to work on a small open math or theoretical CS problem by vibe proving with formal verification.
 
 
 1. Installation and setup:
