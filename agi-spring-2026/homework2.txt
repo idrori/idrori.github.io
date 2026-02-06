@@ -104,7 +104,7 @@ Result
 
 GPT-5.2 Extended thinking will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
 Respond “yes, and work on the open sub-problems.”
-Repeat for 3-5 rounds (up to ~15-30 minutes each)
+Repeat for 5 rounds (up to ~15-30 minutes each)
 Save the entire concatenated conversation (~2 hours) into a solution.txt file.
 
 
