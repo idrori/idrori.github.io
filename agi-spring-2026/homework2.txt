@@ -20,8 +20,8 @@ Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 2. Agent team: 
 See https://code.claude.com/docs/en/agent-teams#use-case-examples
 Choose a small open problem in natural language (into problem.txt)
-Ask GPt-5.2 Pro Extended thinking what team would be best to solve and explore the problem from diverse angles including an AI formal prover.
-Ask Claude Code to create the team
+Ask GPt-5.2 Pro Extended thinking or Claude Code to think deeply what team would be best to solve and explore the problem from diverse angles including an AI formal prover.
+Ask Claude Code create the team
 (Ask Claude Code to read this homework file)
 
 
