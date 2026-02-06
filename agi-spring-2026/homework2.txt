@@ -39,7 +39,7 @@ Problem
 
 Instructions
 
-You are solving an open problem. These are long-standing unsolved problems — most have resisted expert attack for years. A rigorous partial result or a well-documented failure is more valuable than a fake proof.
+You are solving an open problem. These are unsolved problems — most have resisted expert attacks. A rigorous partial result or a well-documented failure is more valuable than a fake proof.
 
 What to do
 
