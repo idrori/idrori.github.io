@@ -5,26 +5,28 @@ Prof. Iddo Drori, last updated 2/5/26
 In this homework, you will use AI to work on a small open math or theoretical CS problem by vibe proving with formal verification.
 
 
-1. Installation:
+1. Installation and setup:
 Update Claude Code to the latest version and use Opus 4.6
 Install the free student version of Gemini-3 Pro
 Use GPT-5.2 Pro Extended thinking if available (otherwise Gemini-3 Pro Thinking)
+Ask Claude Code to enable agent teams
 Ask Claude Code to install an open source Claude Code Lean agent prover, such as https://github.com/project-numina/numina-lean-agent
 Claude Code will install Lean (~5GB)
-
-
-2. Lean:
 Use https://live.lean-lang.org to check that a simple Lean program compiles.
 Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 
+2. Team
+Choose a small open problem in natural language (into problem.txt)
+Ask GPt-5.2 Pro Extended thinking what team would be best to solve and explore the problem from diverse angles including an AI formal prover.
+Ask Claude Code to create the team
+
 
 3. Autoformalization with cycle consistency:
-Choose a small open problem in natural language (into problem.txt)
-Ask Claude Code to use the agent to formalize the problem in Lean (into problem.lean)
+Ask Claude Code to use the team and agent to formalize the problem in Lean (into problem.lean)
 Ask Claude Code to check that the Lean compiles
 Ask Claude Code to back translate the compiled Lean into natural language (into problem.lean-nl.txt)
 Ask GPT-5.2 Pro Extended thinking to check if the original problem (problem.txt) in natural language is mathematically equivalent to the back-translated problem (problem.lean-nl.txt).
-If they are not equivalent, then ask the agent to fix the Lean formalization
+If they are not equivalent, then ask the team and agent to fix the Lean formalization
 and repeat for 3-5 rounds, until the problem formulation both compiles, and its back translation is mathematically equivalent to the original problem.
 
 
@@ -103,12 +105,13 @@ Repeat for 3-5 rounds (up to ~15-30 minutes each)
 Save the entire concatenated conversation (~2 hours) into a solution.txt file.
 
 
-5. Lean proof:
-Ask Claude Code to use the Lean agent to formally solve the problem (into proof.lean), given:
+5. Proof:
+Ask Claude code to 
+Ask Claude Code to use the team and agent to formally solve the problem (into proof.lean), given:
 Problem in natural language (problem.txt)
 Problem in Lean (problem.lean)
 Concatenated answer of GPT-5.2 Pro Extended thinking (solution.txt)
-Ask Claude Code to use the Lean agent to check that the Lean proof compiles, without sorry statements.
+Ask Claude Code to use the team and agent to check that the Lean proof compiles, without sorry statements.
 Debug using https://live.lean-lang.org
 Repeat for sub-problems
 
