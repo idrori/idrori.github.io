@@ -36,7 +36,7 @@ and repeat for 3-5 rounds, until the problem formulation both compiles, and its 
 4. Iterative natural language proof with sub-problems:
 Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifier prompt below only once.
 GPT will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
-Continue the conversation by responding “yes, and work on the open sub-problems.”
+Continue the conversation by responding “yes / you choose, and work on the open sub-problems.”
 Continue this for 5-10 rounds (up to ~15-30 minutes each)
 Save the entire concatenated conversation (~2-3 hours) into a solution.txt file.
 
@@ -107,13 +107,11 @@ Result
 * Open sub-problems: [If applicable, specific sub-problems whose resolution would complete the proof.]
 
 
-
-
 5. Proof:
 Ask Claude Code to use the team and agent to formally solve the problem (into proof.lean), given:
 Problem in natural language (problem.txt)
 Problem in Lean (problem.lean)
-Concatenated answer of GPT-5.2 Pro Extended thinking (solution.txt)
+Concatenated answers of GPT-5.2 Pro Extended thinking (solution.txt)
 Ask Claude Code to use the team and agent to check that the Lean proof compiles, without sorry statements.
 Debug using https://live.lean-lang.org
 Repeat for sub-problems until there are no sorry statements
