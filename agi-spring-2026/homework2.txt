@@ -25,10 +25,8 @@ Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifie
 
 Problem Solver
 
-Problem {problemId}
-
+Problem
 {problemText}
-
 {commentsText}
 
 Instructions
