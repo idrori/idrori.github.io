@@ -109,14 +109,13 @@ Save the entire concatenated conversation (~2 hours) into a solution.txt file.
 
 
 5. Proof:
-Ask Claude code to 
 Ask Claude Code to use the team and agent to formally solve the problem (into proof.lean), given:
 Problem in natural language (problem.txt)
 Problem in Lean (problem.lean)
 Concatenated answer of GPT-5.2 Pro Extended thinking (solution.txt)
 Ask Claude Code to use the team and agent to check that the Lean proof compiles, without sorry statements.
 Debug using https://live.lean-lang.org
-Repeat for sub-problems
+Repeat for sub-problems until there are no sorry statements
 
 
 Submission:
