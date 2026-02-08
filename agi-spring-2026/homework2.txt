@@ -98,7 +98,7 @@ Result
 Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 Use https://live.lean-lang.org to check that a simple Lean program compiles.
 
-Copy problem.txt and solution.txt to a project directory, in Codex app add a new project, and start Claude Code from the project directory.
+Copy problem.txt and solution.txt to a project directory; in Codex app add a new project; start Claude Code from the project directory.
 
 Prompt Codex 5.3 Extra High that the solution needs to end up having a Lean 4 proof, without sorry statements or axioms, saved as solution.lean, that:
 a. Compiles (solution.lean)
@@ -126,6 +126,7 @@ problem.txt
 problem.lean
 solution.txt
 proof.lean
+
 
 
 Out: 2/9/2026 Due: 2/23/2026
