@@ -13,7 +13,7 @@ Ask Claude Code to install an open source Claude Code Lean agent prover, such as
 Choose a small open problem in natural language to work on, save it as problem.txt
 
 
-2. Proof in natural language:
+2. Solution in natural language:
 Ask GPT-5.2 Pro Extended thinking to solve the problem using the prompt below
 GPT will answer, ending with open sub-problems and optionally suggest “If you want, I can…”
 Respond “yes / you choose, and work on the open sub-problems.", and continue this iteratively 
@@ -94,7 +94,7 @@ Result
 * Open sub-problems: [If applicable, specific sub-problems whose resolution would complete the proof.]
 
 
-3. Formal Verification in Lean:
+3. Proof formally verified in Lean:
 Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 Use https://live.lean-lang.org to check that a simple Lean program compiles.
 
