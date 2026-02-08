@@ -105,7 +105,7 @@ a. Compiles (solution.lean)
 b. When the comments are removed from the Lean proof file and the Lean proof is backtranslated to natural language (solution.lean-nl.txt)
 should be mathematically equivalent to the original proof (solution.txt).
 
-Use https://live.lean-lang.org to verify that the proof compiles :)
+Use https://live.lean-lang.org to verify that the proof compiles.
 
 Ask GPT-5.2 Pro Extended thinking or Claude Code to think what team would best solve and explore the problem from diverse angles including the formal prover.
 Ask Claude Code create the team, and use the team and formal prover agent to formalize the problem in Lean (problem.lean)
