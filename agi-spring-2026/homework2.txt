@@ -1,52 +1,32 @@
 AGI, Spring 2026, Homework 2
-Prof. Iddo Drori, last updated 2/6/26
+Prof. Iddo Drori, last updated 2/8/26
 
 
-In this homework, you will use a team of AI agents to work on a small open math or theoretical CS problem 
+In this homework, you will use AI agents to work on a small open math or theoretical CS problem 
 by a deep dive and vibe proving with formal verification.
 
 
 1. Installation and setup:
-Update Claude Code to the latest version (claude update) and use Opus 4.6
-Ask Claude Code to enable agent teams
-Install the free student version of Gemini-3 Pro
-Use GPT-5.2 Pro Extended thinking if available (otherwise Gemini-3 Pro Thinking)
-Ask Claude Code to install an open source Claude Code Lean agent prover, such as https://github.com/project-numina/numina-lean-agent
-Claude Code will install Lean (~5GB)
-Use https://live.lean-lang.org to check that a simple Lean program compiles.
-Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
+Install Anthropic's Claude Code, OpenAI's Codex app, and the free student version of Google's Gemini-3 Pro
+Update Claude Code to the latest version (by claude update in the command line) and use Opus 4.6, and update Codex app to the latest version
+Ask Claude Code to "enable agent teams" (in Claude Code), see https://code.claude.com/docs/en/agent-teams#use-case-examples
+Ask Claude Code to install an open source Claude Code Lean agent prover, such as https://github.com/project-numina/numina-lean-agent, will install Lean (~5GB)
+Choose a small open problem in natural language to work on, save it as problem.txt
 
 
-2. Agent team: 
-See https://code.claude.com/docs/en/agent-teams#use-case-examples
-Choose a small open problem in natural language (into problem.txt)
-Ask GPt-5.2 Pro Extended thinking or Claude Code to think deeply what team would be best to solve and explore the problem from diverse angles including an AI formal prover.
-Ask Claude Code create the team
-(Ask Claude Code to read this homework file)
-
-
-3. Autoformalization with cycle consistency:
-Ask Claude Code to use the team and agent to formalize the problem in Lean (into problem.lean)
-Ask Claude Code to check that the Lean compiles
-Ask Claude Code to back translate the compiled Lean into natural language (into problem.lean-nl.txt)
-Ask GPT-5.2 Pro Extended thinking to check if the original problem (problem.txt) in natural language is mathematically equivalent to the back-translated problem (problem.lean-nl.txt).
-If they are not equivalent, then ask the team and agent to fix the Lean formalization
-and repeat for 3-5 rounds, until the problem formulation both compiles, and its back translation is mathematically equivalent to the original problem.
-
-
-4. Iterative natural language proof with sub-problems:
-Ask GPT-5.2 Pro Extended thinking to solve the problem using a generator-verifier prompt below only once.
-GPT will answer (~up to 30 minutes), ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
-Continue the conversation by responding “yes / you choose, and work on the open sub-problems.”
-Continue this for 5-10 rounds (up to ~15-30 minutes each)
-Save the entire concatenated conversation into a solution.txt file.
-Share a GPT link of using the following prompt iteratively for solving the problem, for example:
+2. Iterative natural language proof with sub-problems:
+Ask GPT-5.2 Pro Extended thinking to solve the problem using the generator-verifier prompt below
+GPT will answer, ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
+Continue the conversation by responding “yes / you choose, and work on the open sub-problems.", and continue this iteratively until the problem is claimed to be solved, and save the entire concatenated conversation into a solution.txt file.
+Ask GPT-5.2 Extended thinking to write the entire solution so it is correct and complete and ready for review and is in precise natural language before autoformalization into Lean, and save the solution.txt file.
+Share your GPT link, for example (10,9,5,2,1 solved):
 https://chatgpt.com/share/6986c290-9fbc-8012-8937-c78187a7adba
 https://chatgpt.com/share/6986c2c9-6974-8012-b418-43f1a29326b0
-https://chatgpt.com/share/6986b8db-44e8-8012-9fa5-f282d012661e
 https://chatgpt.com/share/6986fc9f-cd9c-8012-a02b-897ba9abd914
-https://chatgpt.com/share/6986fc84-e71c-8012-9219-304529828d9e
+https://chatgpt.com/share/69876b09-5604-8012-bef5-ec52564effc1
 https://chatgpt.com/share/6986ba36-8fbc-8012-adfc-777fabf13fa9
+
+Prompt:
 
 Problem Solver
 
@@ -114,15 +94,29 @@ Result
 * Open sub-problems: [If applicable, specific sub-problems whose resolution would complete the proof.]
 
 
-5. Proof:
-Ask Claude Code to use the team and agent to formally solve the problem (into proof.lean), given:
-Problem in natural language (problem.txt)
-Problem in Lean (problem.lean)
-Concatenated answers of GPT-5.2 Pro Extended thinking (solution.txt)
-Ask Claude Code to use the team and agent to check that the Lean proof compiles, without sorry statements.
-Debug using https://live.lean-lang.org
-Repeat for sub-problems until there are no sorry statements
+3. Lean
+Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
+Use https://live.lean-lang.org to check that a simple Lean program compiles.
 
+Copy problem.txt and solution.txt to a project directory, in Codex app add a new project, and start Claude Code from the project directory.
+
+Prompt Codex 5.3 Extra High that the solution needs to end up having a Lean 4 proof, without sorry statements or axioms, saved as solution.lean, that:
+a. Compiles (solution.lean)
+b. When the comments are removed from the Lean proof file and the Lean proof is backtranslated to natural language (solution.lean-nl.txt)
+should be mathematically equivalent to the original proof (solution.txt).
+
+Ask GPT-5.2 Pro Extended thinking or Claude Code to think what team would best solve and explore the problem from diverse angles including the formal prover.
+Ask Claude Code create the team, and use the team and formal prover agent to formalize the problem in Lean (problem.lean)
+Ask Claude Code to check that the Lean compiles, and back translate the compiled Lean into natural language (problem.lean-nl.txt)
+Ask GPT-5.2 Pro Extended thinking to check if the original problem (problem.txt) in natural language is mathematically equivalent to the back-translated problem (problem.lean-nl.txt).
+If they are not equivalent, then ask the team and agent to fix the Lean formalization
+and repeat, until the problem formulation both compiles, and its back translation is mathematically equivalent to the original problem.
+
+Ask Claude Code to use a team including the lean agent to formally solve the problem (proof.lean), given:
+the problem in natural language (problem.txt), problem in Lean (problem.lean), natural language solution (solution.txt)
+Ask Claude Code to use a team including the lean agent to check that the Lean proof compiles, without sorry statements or axioms.
+
+ 
 
 Submission:
 Submit the following files on the Google Drive under Homeworks/2/Your Directory:
@@ -131,6 +125,7 @@ problem.lean
 problem-lean-nl.txt
 solution-nl.txt
 proof.lean
+
 
 
 Out: 2/9/2026 Due: 2/23/2026
