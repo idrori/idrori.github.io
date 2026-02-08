@@ -107,8 +107,8 @@ Prompt Codex 5.3 Extra High to only formalize the problem in Lean 4, verify that
 
 b. Proof in Lean using the Codex app:
 Prompt Codex 5.3 Extra High to formalize the natural language proof.txt into a Lean 4 proof proof.lean, without sorry statements or axioms, that:
-a. Compiles (proof.lean)
-b. When the comments are removed from the Lean proof file and the Lean proof is backtranslated to natural language (proof.lean-nl.txt)
+i. Compiles (proof.lean)
+ii. When the comments are removed from the Lean proof file and the Lean proof is backtranslated to natural language (proof.lean-nl.txt)
 should be mathematically equivalent to the original proof.txt.
 Prompt Codex to use the installed Lean or https://live.lean-lang.org to verify that the proof compiles, for example (P10,P9,P5,P2,P1):
 
@@ -124,9 +124,9 @@ https://live.lean-lang.org/#codez=JYWwDg9gTgLgBAWQIYwBYBtgCMB0CCmSAzgK5T4Aqq+0An
 
 
 c. Problem and proof in Lean using agent team and prover agent:
-Ask GPT-5.2 Pro Extended thinking or Claude Code to think what team would best solve and explore the problem from diverse angles including the formal prover.
+Ask GPT-5.2 Pro Extended thinking or Claude Code to think what team would best prove and explore the problem from diverse angles including the formal prover.
 Ask Claude Code create the team, and use the team and formal prover agent to formalize the problem in Lean (problem.lean)
-Ask Claude Code to check that the Lean compiles, and back translate the compiled Lean into natural language (problem.lean-nl.txt)
+Ask Claude Code to check that the problem in Lean compiles, and back translate the compiled problem in Lean into natural language (problem.lean-nl.txt)
 Ask GPT-5.2 Pro Extended thinking to check if the original problem (problem.txt) in natural language is mathematically equivalent to the back-translated problem (problem.lean-nl.txt).
 If they are not equivalent, then ask the team and agent to fix the Lean formalization
 and repeat, until the problem formulation both compiles, and its back translation is mathematically equivalent to the original problem.
