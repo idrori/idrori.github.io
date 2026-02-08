@@ -4,7 +4,8 @@ Prof. Iddo Drori, last updated 2/8/26
 
 In this homework, you will use AI agents to prove and verify a small open math or theoretical CS problem.
 
-1. Installation and setup (10%)
+
+1. Installation and setup:
 Install Anthropic's Claude Code, OpenAI's Codex app, and the free student version of Google's Gemini-3 Pro
 Update Claude Code to the latest version (by claude update in the command line) and use Opus 4.6, and update Codex app to the latest version
 Ask Claude Code to "enable agent teams" (in Claude Code), see https://code.claude.com/docs/en/agent-teams#use-case-examples
@@ -12,10 +13,11 @@ Ask Claude Code to install an open source Claude Code Lean agent prover, such as
 Choose a small open problem in natural language to work on, save it as problem.txt
 
 
-2. Proof in natural language (10%)
-Ask GPT-5.2 Pro Extended thinking to solve the problem using the generator-verifier prompt below
-GPT will answer, ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
-Continue the conversation by responding “yes / you choose, and work on the open sub-problems.", and continue this iteratively until GPT-5.2 Pro responds that the problem is solved, and save the entire concatenated conversation into a solution.txt file.
+2. Proof in natural language:
+Ask GPT-5.2 Pro Extended thinking to solve the problem using the prompt below
+GPT will answer, ending with open sub-problems and optionally suggest “If you want, I can…”
+Respond “yes / you choose, and work on the open sub-problems.", and continue this iteratively 
+until GPT-5.2 Pro responds that the problem is solved, and save the entire concatenated conversation into a solution.txt file.
 Ask GPT-5.2 Extended thinking to write the entire solution so it is correct and complete and ready for review and is in precise natural language before autoformalization into Lean, and save the solution.txt file.
 Share your GPT link, for example:
 https://chatgpt.com/share/6986c290-9fbc-8012-8937-c78187a7adba
@@ -92,7 +94,7 @@ Result
 * Open sub-problems: [If applicable, specific sub-problems whose resolution would complete the proof.]
 
 
-3. Formal Verification in Lean (80%)
+3. Formal Verification in Lean:
 Do a Lean game https://adam.math.hhu.de/#/g/leanprover-community/nng4
 Use https://live.lean-lang.org to check that a simple Lean program compiles.
 
