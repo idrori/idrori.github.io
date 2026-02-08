@@ -19,7 +19,7 @@ Ask GPT-5.2 Pro Extended thinking to solve the problem using the generator-verif
 GPT will answer, ending with open sub-problems and optionally suggest a deep dive: “If you want, I can…”
 Continue the conversation by responding “yes / you choose, and work on the open sub-problems.", and continue this iteratively until the problem is claimed to be solved, and save the entire concatenated conversation into a solution.txt file.
 Ask GPT-5.2 Extended thinking to write the entire solution so it is correct and complete and ready for review and is in precise natural language before autoformalization into Lean, and save the solution.txt file.
-Share your GPT link, for example (10,9,5,2,1 solved):
+Share your GPT link, for example:
 https://chatgpt.com/share/6986c290-9fbc-8012-8937-c78187a7adba
 https://chatgpt.com/share/6986c2c9-6974-8012-b418-43f1a29326b0
 https://chatgpt.com/share/6986fc9f-cd9c-8012-a02b-897ba9abd914
@@ -105,6 +105,9 @@ a. Compiles (solution.lean)
 b. When the comments are removed from the Lean proof file and the Lean proof is backtranslated to natural language (solution.lean-nl.txt)
 should be mathematically equivalent to the original proof (solution.txt).
 
+Use https://live.lean-lang.org to verify that the proof compiles :)
+
+
 Ask GPT-5.2 Pro Extended thinking or Claude Code to think what team would best solve and explore the problem from diverse angles including the formal prover.
 Ask Claude Code create the team, and use the team and formal prover agent to formalize the problem in Lean (problem.lean)
 Ask Claude Code to check that the Lean compiles, and back translate the compiled Lean into natural language (problem.lean-nl.txt)
@@ -115,17 +118,14 @@ and repeat, until the problem formulation both compiles, and its back translatio
 Ask Claude Code to use a team including the lean agent to formally solve the problem (proof.lean), given:
 the problem in natural language (problem.txt), problem in Lean (problem.lean), natural language solution (solution.txt)
 Ask Claude Code to use a team including the lean agent to check that the Lean proof compiles, without sorry statements or axioms.
-
  
 
 Submission:
 Submit the following files on the Google Drive under Homeworks/2/Your Directory:
 problem.txt
 problem.lean
-problem-lean-nl.txt
-solution-nl.txt
+solution.txt
 proof.lean
-
 
 
 Out: 2/9/2026 Due: 2/23/2026
