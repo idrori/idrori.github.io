@@ -100,7 +100,7 @@ Use https://live.lean-lang.org to check that a simple Lean program compiles.
 
 Copy problem.txt and solution.txt to a project directory; in Codex app add a new project; start Claude Code from the project directory.
 
-Prompt Codex 5.3 Extra High to use the Lean installation available in the prover agent directory. 
+Prompt Codex 5.3 Extra High to use the Lean installation available in the prover agent directory, installed earlier, 
 and that the solution needs to end up having a Lean 4 proof, without sorry statements or axioms, saved as solution.lean, that:
 a. Compiles (solution.lean)
 b. When the comments are removed from the Lean proof file and the Lean proof is backtranslated to natural language (solution.lean-nl.txt)
