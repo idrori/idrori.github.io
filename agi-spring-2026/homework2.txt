@@ -18,7 +18,7 @@ Ask GPT-5.2 Pro Extended thinking to solve the problem using the prompt below
 GPT will answer, ending with open sub-problems and optionally suggest “If you want, I can…”
 Respond “yes / you choose, and work on the open sub-problems.", and continue this iteratively 
 until GPT-5.2 Pro responds that the problem is solved, and save the entire concatenated conversation into a solution.txt file.
-Ask GPT-5.2 Extended thinking to write the entire solution so it is correct and complete and ready for review and is in precise natural language before autoformalization into Lean, and save the solution.txt file.
+Ask GPT-5.2 Extended thinking to write the entire solution it found so it is correct and complete and ready for review and is in precise natural language before autoformalization into Lean, and save the solution.txt file.
 Share your GPT link, for example:
 https://chatgpt.com/share/6986c290-9fbc-8012-8937-c78187a7adba
 https://chatgpt.com/share/6986c2c9-6974-8012-b418-43f1a29326b0
