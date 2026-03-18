@@ -368,6 +368,10 @@ h3 .name-cv-link {
     margin-bottom: 1rem;
 }
 
+.course p {
+    margin-top: 0.5rem;
+}
+
 .course-list {
     list-style: none;
     padding: 0;
